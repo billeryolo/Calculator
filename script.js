@@ -36,7 +36,11 @@ function operate(operator, number1, number2){
         return multiply(number1,number2)
     }
     else if(operator === '/'){
-        return divide(number1,number2)
+        if(number2 === 0){
+            display = ''; number1 = undefined; number2 = undefined; operator = '';
+            return ('lmao')
+        }
+        else{return divide(number1,number2)}
     }
 }
 function displaying(display){
@@ -58,18 +62,107 @@ function multiply(a,b){
     return (a * b);
 }
 function divide(a,b){
-    a = Number(a);
-    b = Number(b);
-    return (a / b);
+    if(b === '0'){
+        return ('lmao')
+    }
+    else{
+        a = Number(a);
+        b = Number(b);
+        return (a / b);
+    }
+}
+function clickedPlus(){
+    if(number1 === undefined){
+        number1 = display;
+        display = '';
+    }
+    else if(number2 === undefined){
+        number2 = display;
+        if((number2 === '')&& ((operator === '*') || (operator === '/'))){
+            number2 = 1;
+        }
+        display = operate(operator,number1,number2);
+        displaying(display);
+        number1 = display;
+        number2 = undefined;
+        display = '';
+    }
+    operator = '+';
+}
+function clickedMinus(){
+    if(number1 === undefined){
+        number1 = display;
+        display = '';
+    }
+    else if(number2 === undefined){
+        number2 = display;
+        if((number2 === '')&& ((operator === '*') || (operator === '/'))){
+            number2 = 1;
+        }
+        display = operate(operator,number1,number2);
+        displaying(display);
+        number1 = display;
+        number2 = undefined;
+        display = '';
+    }
+    operator = '-'
+}
+function clickedDiv(){
+    if(number1 === undefined){
+        number1 = display;
+        display = '';
+    }
+    else if(number2 === undefined){
+        number2 = display;
+        if((number2 === '')&& ((operator === '*') || (operator === '/'))){
+            number2 = 1;
+        }
+        display = operate(operator,number1,number2);
+        displaying(display);
+        number1 = display;
+        number2 = undefined;
+        display = '';
+    }
+    operator = '/';
+}
+function clickedMulti(){
+    if(number1 === undefined){
+        number1 = display;
+        display = '';
+    }
+    else if(number2 === undefined){
+        number2 = display;
+        if((number2 === '')&& ((operator === '*') || (operator === '/'))){
+            number2 = 1;
+        }
+        display = operate(operator,number1,number2);
+        displaying(display);
+        number1 = display;
+        number2 = undefined;
+        display = '';
+    }
+    operator = '*';
+    }
+function equals(){
+    if(number1 === undefined){
+    }
+    else if((number1 !== undefined)&&(operator !== undefined)&&(display !== '')){
+        number2 = display;
+        display = operate(operator,number1,number2);
+        displaying(display);
+        number1 = display;
+        number2 = undefined;
+        display = '';
+    }
 }
 /* addition.addEventListener('click', () => add())
 substraction.addEventListener('click', () => substract())
 multiplication.addEventListener('click', () => multiply())
 division.addEventListener('click', () => divide()) */
-plus.addEventListener('click', () => {number1 = display; operator = '+'; display = ''; displaying(display)})
-minus.addEventListener('click', () => {number1 = display; operator = '-'; display = ''; displaying(display)})
-multiplication.addEventListener('click', () => {number1 = display; operator = '*'; display = ''; displaying(display)})
-division.addEventListener('click', () => {number1 = display; operator = '/'; display = ''; displaying(display)})
+plus.addEventListener('click', () => clickedPlus())
+minus.addEventListener('click', () => clickedMinus())
+multiplication.addEventListener('click', () => clickedMulti())
+division.addEventListener('click', () => clickedDiv())
 one.addEventListener('click', () => {display = display + '1'; displaying(display)})
 two.addEventListener('click', () => {display = display + '2'; displaying(display)})
 three.addEventListener('click', () => {display = display + '3'; displaying(display)})
@@ -80,6 +173,6 @@ seven.addEventListener('click', () => {display = display + '7'; displaying(displ
 eight.addEventListener('click', () => {display = display + '8'; displaying(display)})
 nine.addEventListener('click', () => {display = display + '9'; displaying(display)})
 zero.addEventListener('click', () => {display = display + '0'; displaying(display)})
-equal.addEventListener('click', () => {number2 = display; display = operate(operator, number1, number2); displaying(display)})
-clear.addEventListener('click', () => {display = display = ''; displaying(display)})
+equal.addEventListener('click', () => {equals()})
+clear.addEventListener('click', () => {display = ''; number1 = undefined; number2 = undefined; operator = ''; displaying(display)})
 point.addEventListener('click',() => {display = display + '.'; displaying(display)})
